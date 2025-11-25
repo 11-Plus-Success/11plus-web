@@ -1,0 +1,147 @@
+[
+  {
+    "category": "NVR",
+    "question": "Which shape completes the alternating pattern: ⬜ ⬛ ⬜ ⬛ ⬜ ⬛ ?",
+    "options": ["⬜", "⬛", "⬜⬛", "⬛⬜"],
+    "answerIndex": 0,
+    "explanation": "The pattern alternates white, black, white, black, so the next is white."
+  },
+  {
+    "category": "NVR",
+    "question": "Find the odd one out: 🟠 🔵 🟢 🟣 🟪",
+    "options": ["🟠", "🔵", "🟢", "🟪"],
+    "answerIndex": 3,
+    "explanation": "🟪 is a square; the others are circles."
+  },
+  {
+    "category": "NVR",
+    "question": "Which shape has the fewest sides?",
+    "options": ["Triangle", "Square", "Pentagon", "Hexagon"],
+    "answerIndex": 0,
+    "explanation": "Triangle has 3 sides, which is fewer than 4, 5 or 6."
+  },
+  {
+    "category": "NVR",
+    "question": "A black arrow points up. It is rotated 90° clockwise. Which way does it point now?",
+    "options": ["Up", "Down", "Left", "Right"],
+    "answerIndex": 3,
+    "explanation": "Rotating an up arrow 90° clockwise makes it point right."
+  },
+  {
+    "category": "NVR",
+    "question": "Pattern: ▲ ▼ ▲ ▼ ▲ ? What comes next?",
+    "options": ["▲", "▼", "▲▼", "▼▲"],
+    "answerIndex": 1,
+    "explanation": "The pattern alternates up, down, up, down; the next is down."
+  },
+  {
+    "category": "NVR",
+    "question": "Which is the odd one out?",
+    "options": ["⬜", "🔺", "⚫", "⬛"],
+    "answerIndex": 1,
+    "explanation": "🔺 is a triangle; the others are a square, circle and square-shaped symbol."
+  },
+  {
+    "category": "NVR",
+    "question": "A shape is shaded on the left half. It is reflected in a vertical mirror line. Which half is shaded now?",
+    "options": ["Left half", "Right half", "Both halves", "Neither half"],
+    "answerIndex": 1,
+    "explanation": "A vertical reflection swaps left and right, so the shading moves to the right half."
+  },
+  {
+    "category": "NVR",
+    "question": "Sequence of sides: triangle (3), square (4), pentagon (5), hexagon (6), ?",
+    "options": ["Triangle", "Square", "Pentagon", "Heptagon"],
+    "answerIndex": 3,
+    "explanation": "The number of sides increases by 1 each time, so next is 7 sides: a heptagon."
+  },
+  {
+    "category": "NVR",
+    "question": "Circles are arranged: 1 black, 2 white, 3 black, 4 white, 5 black, ?. What comes next?",
+    "options": ["White", "Black", "Striped", "Empty"],
+    "answerIndex": 0,
+    "explanation": "They alternate black, white, black, white, black, so the 6th is white."
+  },
+  {
+    "category": "NVR",
+    "question": "Which net could fold to make a cube?",
+    "options": [
+      "Six squares in a straight line",
+      "Four squares in a row with one each above the 2nd and 3rd",
+      "Three squares in a row with one above the middle",
+      "Two squares only"
+    ],
+    "answerIndex": 1,
+    "explanation": "Four in a row with one above the 2nd and 3rd is a standard cube net."
+  },
+  {
+    "category": "NVR",
+    "question": "In a row of shapes, each next shape adds one more dot: ●, ●●, ●●●, ●●●●, ?. What comes next?",
+    "options": ["●", "●●●", "●●●●●", "●●●●●●"],
+    "answerIndex": 2,
+    "explanation": "The pattern adds one dot each time; after four dots comes five dots."
+  },
+  {
+    "category": "NVR",
+    "question": "A square is divided by a diagonal line from top-left to bottom-right. The top half is shaded. If rotated 90° clockwise, which part is shaded now?",
+    "options": ["Left half", "Right half", "Top half", "Bottom half"],
+    "answerIndex": 3,
+    "explanation": "Rotating the square moves the original top shaded triangle to the bottom position."
+  },
+  {
+    "category": "NVR",
+    "question": "Which is the odd one out?",
+    "options": ["◆", "◇", "⬟", "⬢"],
+    "answerIndex": 1,
+    "explanation": "◇ is an outline diamond while the others are filled or different polygon types; it visually stands out."
+  },
+  {
+    "category": "NVR",
+    "question": "A pattern of arrows is: →, ↑, ←, ↓, →, ?. What comes next?",
+    "options": ["↑", "←", "↓", "→"],
+    "answerIndex": 0,
+    "explanation": "The arrows turn 90° anticlockwise each time: right, up, left, down, right, then up."
+  },
+  {
+    "category": "NVR",
+    "question": "A row of shapes alternates between circles and squares: ○, □, ○, □, ○, ?. What comes next?",
+    "options": ["○", "□", "○□", "□○"],
+    "answerIndex": 1,
+    "explanation": "The pattern is circle, square, circle, square, so after ○ comes □."
+  },
+  {
+    "category": "NVR",
+    "question": "Which shape is most like a mirror image of a 'L' shape?",
+    "options": ["Γ", "T", "I", "O"],
+    "answerIndex": 0,
+    "explanation": "Γ looks like an L reflected in a vertical mirror."
+  },
+  {
+    "category": "NVR",
+    "question": "In a pattern, each black square is followed by two white squares: ■, □, □, ■, □, □, ?. What comes next?",
+    "options": ["■", "□", "■, □", "□, □"],
+    "answerIndex": 0,
+    "explanation": "The pattern is black, white, white repeating, so after the second white comes a black square."
+  },
+  {
+    "category": "NVR",
+    "question": "Which is the odd one out?",
+    "options": ["⚪", "⚫", "⬤", "⬛"],
+    "answerIndex": 3,
+    "explanation": "⬛ is a square; the others are circle symbols."
+  },
+  {
+    "category": "NVR",
+    "question": "A clock face is rotated 180°. Where does the 12 move to?",
+    "options": ["3 o'clock position", "6 o'clock position", "9 o'clock position", "Stays at top"],
+    "answerIndex": 1,
+    "explanation": "A 180° rotation moves the top (12) to the bottom (6)."
+  },
+  {
+    "category": "NVR",
+    "question": "In a sequence of shapes, each next shape has one more side: triangle, square, pentagon, hexagon, ?. What comes next?",
+    "options": ["Triangle", "Square", "Heptagon", "Octagon"],
+    "answerIndex": 2,
+    "explanation": "The number of sides goes 3, 4, 5, 6; the next is 7 sides: a heptagon."
+  }
+]

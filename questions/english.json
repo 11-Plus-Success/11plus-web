@@ -1,0 +1,167 @@
+[
+  {
+    "category": "English",
+    "question": "Choose the correct word: Although it was raining, they decided to ____ to the park.",
+    "options": ["gone", "going", "go", "goes"],
+    "answerIndex": 2,
+    "explanation": "After 'to' we use the base form of the verb: 'to go'."
+  },
+  {
+    "category": "English",
+    "question": "Select the synonym of 'brave'.",
+    "options": ["cowardly", "strong", "fearless", "weak"],
+    "answerIndex": 2,
+    "explanation": "'Fearless' means not afraid, which is closest to 'brave'."
+  },
+  {
+    "category": "English",
+    "question": "Choose the best antonym for 'ancient'.",
+    "options": ["old", "historic", "modern", "ruined"],
+    "answerIndex": 2,
+    "explanation": "'Ancient' means very old; its opposite is 'modern'."
+  },
+  {
+    "category": "English",
+    "question": "Which sentence is punctuated correctly?",
+    "options": [
+      "my friend Tom said lets play football.",
+      "My friend Tom said, lets play football.",
+      "My friend tom said, 'let's play football'.",
+      "My friend Tom said, 'Let's play football.'"
+    ],
+    "answerIndex": 3,
+    "explanation": "Correct capitals, comma, apostrophe in 'Let's' and full stop inside the quotation marks."
+  },
+  {
+    "category": "English",
+    "question": "Choose the correct form: She has ____ her homework.",
+    "options": ["do", "did", "done", "does"],
+    "answerIndex": 2,
+    "explanation": "After 'has', use the past participle: 'has done'."
+  },
+  {
+    "category": "English",
+    "question": "Which word is a noun?",
+    "options": ["quickly", "beautiful", "happiness", "run"],
+    "answerIndex": 2,
+    "explanation": "'Happiness' names an idea, so it is a noun."
+  },
+  {
+    "category": "English",
+    "question": "Which word best completes the sentence? 'He spoke in a very ____ voice.'",
+    "options": ["softly", "soft", "softer", "softest"],
+    "answerIndex": 1,
+    "explanation": "The word describes the noun 'voice', so we need the adjective 'soft'."
+  },
+  {
+    "category": "English",
+    "question": "Which sentence uses the apostrophe correctly?",
+    "options": [
+      "The dogs bone was buried.",
+      "The dog's bone was buried.",
+      "The dogs' bone's was buried.",
+      "The dog s' bone was buried."
+    ],
+    "answerIndex": 1,
+    "explanation": "The bone belongs to one dog, so 'dog's' is correct."
+  },
+  {
+    "category": "English",
+    "question": "Choose the correctly spelled word.",
+    "options": ["definately", "definitely", "definatly", "definitly"],
+    "answerIndex": 1,
+    "explanation": "The correct spelling is 'definitely'."
+  },
+  {
+    "category": "English",
+    "question": "Which word best replaces the underlined word? 'The film was very good.'",
+    "options": ["boring", "excellent", "tiny", "careful"],
+    "answerIndex": 1,
+    "explanation": "'Excellent' is a stronger synonym for 'good' in this context."
+  },
+  {
+    "category": "English",
+    "question": "Which word is an adverb?",
+    "options": ["slow", "slowly", "slowness", "slower"],
+    "answerIndex": 1,
+    "explanation": "Adverbs often end in '-ly' and describe how something is done: 'slowly'."
+  },
+  {
+    "category": "English",
+    "question": "Which word is a synonym of 'begin'?",
+    "options": ["end", "start", "finish", "stop"],
+    "answerIndex": 1,
+    "explanation": "'Start' means the same as 'begin'."
+  },
+  {
+    "category": "English",
+    "question": "Choose the best antonym for 'polite'.",
+    "options": ["kind", "rude", "happy", "shy"],
+    "answerIndex": 1,
+    "explanation": "The opposite of 'polite' is 'rude'."
+  },
+  {
+    "category": "English",
+    "question": "Which sentence is written in the past tense?",
+    "options": [
+      "I walk to school.",
+      "I am walking to school.",
+      "I walked to school.",
+      "I will walk to school."
+    ],
+    "answerIndex": 2,
+    "explanation": "'Walked' shows an action that has already happened (past tense)."
+  },
+  {
+    "category": "English",
+    "question": "Which word is a conjunction?",
+    "options": ["and", "under", "quickly", "blue"],
+    "answerIndex": 0,
+    "explanation": "'And' joins words or clauses, so it is a conjunction."
+  },
+  {
+    "category": "English",
+    "question": "Choose the correctly punctuated sentence.",
+    "options": [
+      "Where are you going.",
+      "Where are you going?",
+      "Where are you going!",
+      "Where are you going,"
+    ],
+    "answerIndex": 1,
+    "explanation": "A question needs a question mark at the end."
+  },
+  {
+    "category": "English",
+    "question": "Which word is the verb in this sentence: 'The cat slept on the mat.'",
+    "options": ["cat", "slept", "on", "mat"],
+    "answerIndex": 1,
+    "explanation": "The verb shows the action: 'slept'."
+  },
+  {
+    "category": "English",
+    "question": "Which word is closest in meaning to 'silent'?",
+    "options": ["noisy", "quiet", "busy", "angry"],
+    "answerIndex": 1,
+    "explanation": "'Quiet' is closest in meaning to 'silent'."
+  },
+  {
+    "category": "English",
+    "question": "Choose the correct homophone: 'I want to ____ this book.'",
+    "options": ["by", "buy", "bye", "bee"],
+    "answerIndex": 1,
+    "explanation": "'Buy' is the correct spelling when you purchase something."
+  },
+  {
+    "category": "English",
+    "question": "Which sentence uses commas correctly in a list?",
+    "options": [
+      "I bought apples bananas and oranges.",
+      "I bought apples, bananas and oranges.",
+      "I bought, apples, bananas, and oranges.",
+      "I bought apples, bananas, and, oranges."
+    ],
+    "answerIndex": 1,
+    "explanation": "Commas go between items: 'apples, bananas and oranges'."
+  }
+]

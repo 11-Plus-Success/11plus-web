@@ -1,0 +1,142 @@
+[
+  {
+    "category": "Maths",
+    "question": "What is 3/8 of 64?",
+    "options": ["18", "21", "24", "28"],
+    "answerIndex": 2,
+    "explanation": "3/8 × 64 = (3 × 64) ÷ 8 = 192 ÷ 8 = 24."
+  },
+  {
+    "category": "Maths",
+    "question": "What is 25% of 80?",
+    "options": ["15", "18", "20", "25"],
+    "answerIndex": 2,
+    "explanation": "25% means one quarter (1/4). 80 ÷ 4 = 20."
+  },
+  {
+    "category": "Maths",
+    "question": "7 × ? = 56",
+    "options": ["6", "7", "8", "9"],
+    "answerIndex": 2,
+    "explanation": "Divide 56 by 7 to find the missing number: 56 ÷ 7 = 8."
+  },
+  {
+    "category": "Maths",
+    "question": "A shop sells 3 pencils for 90p. How much for 5 pencils?",
+    "options": ["£1.20", "£1.50", "£1.40", "£1.80"],
+    "answerIndex": 1,
+    "explanation": "3 pencils cost 90p, so 1 costs 30p. 5 × 30p = 150p = £1.50."
+  },
+  {
+    "category": "Maths",
+    "question": "What is 135 − 47?",
+    "options": ["78", "88", "92", "98"],
+    "answerIndex": 1,
+    "explanation": "135 − 40 = 95, then 95 − 7 = 88."
+  },
+  {
+    "category": "Maths",
+    "question": "A rectangle is 8 cm long and 5 cm wide. What is its perimeter?",
+    "options": ["13 cm", "26 cm", "40 cm", "52 cm"],
+    "answerIndex": 1,
+    "explanation": "Perimeter = 2 × (8 + 5) = 2 × 13 = 26 cm."
+  },
+  {
+    "category": "Maths",
+    "question": "3.5 kg is equal to how many grams?",
+    "options": ["35 g", "350 g", "3500 g", "35,000 g"],
+    "answerIndex": 2,
+    "explanation": "1 kg = 1000 g, so 3.5 × 1000 = 3500 g."
+  },
+  {
+    "category": "Maths",
+    "question": "What is 2.4 + 3.75?",
+    "options": ["5.09", "5.15", "6.05", "6.15"],
+    "answerIndex": 3,
+    "explanation": "2.4 + 3.75 = 2.40 + 3.75 = 6.15."
+  },
+  {
+    "category": "Maths",
+    "question": "A bus leaves at 09:25 and arrives at 10:10. How long is the journey?",
+    "options": ["35 minutes", "40 minutes", "45 minutes", "50 minutes"],
+    "answerIndex": 2,
+    "explanation": "From 9:25 to 10:00 is 35 minutes, then 10 more minutes to 10:10. Total 45 minutes."
+  },
+  {
+    "category": "Maths",
+    "question": "The numbers are 6, 8, 10, 10. What is the mean (average)?",
+    "options": ["8", "8.5", "9", "9.5"],
+    "answerIndex": 1,
+    "explanation": "Sum = 6 + 8 + 10 + 10 = 34. 34 ÷ 4 = 8.5."
+  },
+  {
+    "category": "Maths",
+    "question": "What is 3/5 of 60?",
+    "options": ["30", "32", "34", "36"],
+    "answerIndex": 3,
+    "explanation": "3/5 × 60 = (3 × 60) ÷ 5 = 180 ÷ 5 = 36."
+  },
+  {
+    "category": "Maths",
+    "question": "What is 35% of 200?",
+    "options": ["50", "60", "70", "80"],
+    "answerIndex": 2,
+    "explanation": "10% of 200 is 20, so 30% is 60 and 5% is 10, total 70."
+  },
+  {
+    "category": "Maths",
+    "question": "72 ÷ 8 = ?",
+    "options": ["7", "8", "9", "10"],
+    "answerIndex": 2,
+    "explanation": "8 × 9 = 72, so 72 ÷ 8 = 9."
+  },
+  {
+    "category": "Maths",
+    "question": "15 × 12 = ?",
+    "options": ["160", "170", "180", "190"],
+    "answerIndex": 2,
+    "explanation": "15 × 12 = (15 × 10) + (15 × 2) = 150 + 30 = 180."
+  },
+  {
+    "category": "Maths",
+    "question": "What is 6.4 − 2.75?",
+    "options": ["3.25", "3.55", "3.65", "3.75"],
+    "answerIndex": 2,
+    "explanation": "6.40 − 2.75 = 3.65."
+  },
+  {
+    "category": "Maths",
+    "question": "A square has side length 7 cm. What is its perimeter?",
+    "options": ["14 cm", "21 cm", "28 cm", "35 cm"],
+    "answerIndex": 2,
+    "explanation": "Perimeter of a square = 4 × side = 4 × 7 = 28 cm."
+  },
+  {
+    "category": "Maths",
+    "question": "What is 1/6 of 54?",
+    "options": ["6", "8", "9", "12"],
+    "answerIndex": 2,
+    "explanation": "54 ÷ 6 = 9."
+  },
+  {
+    "category": "Maths",
+    "question": "The numbers are 12, 18, 22 and 28. What is their mean?",
+    "options": ["18", "19", "20", "21"],
+    "answerIndex": 2,
+    "explanation": "Sum = 12 + 18 + 22 + 28 = 80. 80 ÷ 4 = 20."
+  },
+  {
+    "category": "Maths",
+    "question": "A bag has 20 marbles. 8 are red, the rest are blue. How many are blue?",
+    "options": ["10", "11", "12", "13"],
+    "answerIndex": 2,
+    "explanation": "Blue marbles = 20 − 8 = 12."
+  },
+  {
+    "category": "Maths",
+    "question": "A book costs £4.50. How much do 3 copies cost?",
+    "options": ["£9.00", "£12.50", "£13.50", "£14.00"],
+    "answerIndex": 2,
+    "explanation": "3 × £4.50 = £13.50."
+  }
+]

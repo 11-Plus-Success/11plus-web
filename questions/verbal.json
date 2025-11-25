@@ -1,0 +1,157 @@
+[
+  {
+    "category": "Verbal",
+    "question": "Find the two words most opposite in meaning.",
+    "options": [
+      "happy & sad",
+      "tired & cheerful",
+      "cheerful & gloomy",
+      "happy & cheerful"
+    ],
+    "answerIndex": 0,
+    "explanation": "'Happy' and 'sad' are direct opposites (antonyms)."
+  },
+  {
+    "category": "Verbal",
+    "question": "book : read :: fork : ____",
+    "options": ["eat", "cook", "stab", "wash"],
+    "answerIndex": 0,
+    "explanation": "You read a book; you eat with a fork."
+  },
+  {
+    "category": "Verbal",
+    "question": "Which word does NOT belong?",
+    "options": ["cat", "dog", "rabbit", "fox", "parrot"],
+    "answerIndex": 4,
+    "explanation": "Cat, dog, rabbit and fox are mammals; parrot is a bird."
+  },
+  {
+    "category": "Verbal",
+    "question": "Choose the pair that means the same: 'silent : ____'",
+    "options": ["loud", "noisy", "quiet", "busy"],
+    "answerIndex": 2,
+    "explanation": "'Quiet' is closest in meaning to 'silent'."
+  },
+  {
+    "category": "Verbal",
+    "question": "Find the odd one out.",
+    "options": ["teacher", "doctor", "nurse", "hospital"],
+    "answerIndex": 3,
+    "explanation": "Teacher, doctor and nurse are people; hospital is a place."
+  },
+  {
+    "category": "Verbal",
+    "question": "Which word can go in front of all these: 'room', 'time', 'light'?",
+    "options": ["bed", "day", "night", "air"],
+    "answerIndex": 1,
+    "explanation": "You can have daytime, daylight and day room; 'day' fits all three."
+  },
+  {
+    "category": "Verbal",
+    "question": "REAP is to PEAR as EVIL is to ____.",
+    "options": ["VILE", "LIVE", "VEIL", "VILE or LIVE"],
+    "answerIndex": 3,
+    "explanation": "PEAR is an anagram of REAP; VILE and LIVE are common anagrams of EVIL."
+  },
+  {
+    "category": "Verbal",
+    "question": "Which of these is a synonym of 'tidy'?",
+    "options": ["messy", "neat", "untidy", "dirty"],
+    "answerIndex": 1,
+    "explanation": "'Neat' means tidy and well ordered."
+  },
+  {
+    "category": "Verbal",
+    "question": "Complete the analogy: 'cold : freezing :: warm : ____'",
+    "options": ["hot", "boiling", "cool", "burning"],
+    "answerIndex": 0,
+    "explanation": "Freezing is very cold; hot is very warm."
+  },
+  {
+    "category": "Verbal",
+    "question": "Which word is a compound word?",
+    "options": ["house", "sun", "football", "rain"],
+    "answerIndex": 2,
+    "explanation": "'Football' is made from 'foot' + 'ball', so it is a compound word."
+  },
+  {
+    "category": "Verbal",
+    "question": "Which word does NOT belong?",
+    "options": ["table", "chair", "sofa", "banana"],
+    "answerIndex": 3,
+    "explanation": "Table, chair and sofa are furniture; banana is a fruit."
+  },
+  {
+    "category": "Verbal",
+    "question": "Choose the pair that means the opposite: 'kind : ____'",
+    "options": ["gentle", "helpful", "cruel", "friendly"],
+    "answerIndex": 2,
+    "explanation": "The opposite of 'kind' is 'cruel'."
+  },
+  {
+    "category": "Verbal",
+    "question": "Which word is a synonym of 'angry'?",
+    "options": ["calm", "furious", "sleepy", "hungry"],
+    "answerIndex": 1,
+    "explanation": "'Furious' means very angry."
+  },
+  {
+    "category": "Verbal",
+    "question": "Which word completes the pattern? 'tiny, small, medium, large, ____'",
+    "options": ["short", "thin", "huge", "wide"],
+    "answerIndex": 2,
+    "explanation": "The list goes from smallest to largest; after large comes huge."
+  },
+  {
+    "category": "Verbal",
+    "question": "Which pair is most similar in meaning?",
+    "options": [
+      "quick and slow",
+      "happy and joyful",
+      "dark and bright",
+      "full and empty"
+    ],
+    "answerIndex": 1,
+    "explanation": "'Happy' and 'joyful' have very similar meanings."
+  },
+  {
+    "category": "Verbal",
+    "question": "Find the odd one out.",
+    "options": ["January", "March", "Summer", "May"],
+    "answerIndex": 2,
+    "explanation": "January, March and May are months; summer is a season."
+  },
+  {
+    "category": "Verbal",
+    "question": "Complete the analogy: 'hand : glove :: foot : ____'",
+    "options": ["shoe", "sock", "sandals", "boot"],
+    "answerIndex": 1,
+    "explanation": "A glove covers a hand; a sock covers a foot."
+  },
+  {
+    "category": "Verbal",
+    "question": "Which word is a synonym of 'clever'?",
+    "options": ["foolish", "intelligent", "noisy", "clumsy"],
+    "answerIndex": 1,
+    "explanation": "'Intelligent' means clever."
+  },
+  {
+    "category": "Verbal",
+    "question": "Which word does NOT belong?",
+    "options": ["triangle", "square", "circle", "cube"],
+    "answerIndex": 3,
+    "explanation": "Triangle, square and circle are 2D shapes; cube is a 3D shape."
+  },
+  {
+    "category": "Verbal",
+    "question": "Find the pair that is related in the same way as 'bird : nest'.",
+    "options": [
+      "dog : bone",
+      "bee : hive",
+      "cat : milk",
+      "fish : water"
+    ],
+    "answerIndex": 1,
+    "explanation": "A bird lives in a nest; bees live in a hive."
+  }
+]
