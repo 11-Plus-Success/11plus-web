@@ -36,6 +36,50 @@ const scoreText = document.getElementById("score-text");
 const reviewList = document.getElementById("review-list");
 const restartBtn = document.getElementById("restart-btn");
 
+
+// Map internal topic codes → nice readable labels
+const TOPIC_LABELS = {
+  "arithmetic": "Arithmetic",
+  "fractions": "Fractions",
+  "percentages": "Percentages",
+  "decimals": "Decimals",
+  "measure-and-time": "Measure & Time",
+  "geometry-and-angles": "Geometry & Angles",
+  "statistics-and-averages": "Statistics & Averages",
+  "money": "Money",
+
+  // English
+  "synonyms": "Synonyms",
+  "antonyms": "Antonyms",
+  "homophones": "Homophones",
+  "spelling": "Spelling",
+  "punctuation": "Punctuation",
+  "grammar": "Grammar",
+  "nouns": "Nouns",
+  "verbs": "Verbs",
+  "adjectives": "Adjectives",
+  "adverbs": "Adverbs",
+  "conjunctions": "Conjunctions",
+  "verb-tenses": "Verb Tenses",
+  "word-relations": "Word Relations",
+  "word-patterns": "Word Patterns",
+  "word-sequences": "Word Sequences",
+
+  // Verbal Reasoning
+  "odd-one-out-words": "Odd One Out (Words)",
+  "word-analogies": "Word Analogies",
+  "word-codes": "Word Codes",
+  "compound-words": "Compound Words",
+
+  // NVR
+  "odd-one-out-shapes": "Odd One Out (Shapes)",
+  "shape-sequences": "Shape Sequences",
+  "rotations-and-reflections": "Rotations & Reflections",
+  "shape-properties": "Shape Properties",
+  "nets-and-3d": "Nets & 3D Shapes"
+};
+
+
 // ------------- Utility functions -------------
 function shuffle(array) {
   const copy = array.slice();
@@ -273,6 +317,8 @@ function showResult(timeUp) {
   // --- NEW: stats objects ---
   const categoryStats = {}; // { "Maths": {correct, total}, ... }
   const topicStats = {};    // { "Fractions": {correct, total}, ... } if q.topic exists
+  const subjectCorrectCounts = {}; // track correct answers per subject
+  const subjectTotalCounts = {};   // track total questions per subject
 
   quizQuestions.forEach((q, index) => {
     const chosenIndex = answers[index];
@@ -326,41 +372,82 @@ function showResult(timeUp) {
         topicStats[topic].correct += 1;
       }
     }
+
+    // --- NEW: accumulate stats by subject ---
+    if (!subjectCorrectCounts[q.category]) {
+      subjectCorrectCounts[q.category] = 0;
+      subjectTotalCounts[q.category] = 0;
+    }
+    subjectTotalCounts[q.category]++;
+    if (isCorrect) {
+      subjectCorrectCounts[q.category]++;
+    }
   });
 
-  // --- NEW: summary block appended after the detailed review ---
+  // --- NEW: Summary grouped by subject → topic ---
   const summary = document.createElement("div");
   summary.className = "summary-block";
 
-  let summaryHtml = "";
+  // Build nested stats: subject → topic
+  const subjectTopicStats = {};
 
-  // Subject summary
-  summaryHtml += `<h4>Summary by subject</h4>`;
-  summaryHtml += `<ul class="summary-list">`;
-  Object.keys(categoryStats).forEach(cat => {
-    const { correct, total } = categoryStats[cat];
-    const percent = total > 0 ? Math.round((correct / total) * 100) : 0;
-    summaryHtml += `<li><strong>${cat}</strong>: ${correct}/${total} correct (${percent}%)</li>`;
+  quizQuestions.forEach((q, index) => {
+    const chosenIndex = answers[index];
+    const isCorrect = chosenIndex === q.answerIndex;
+
+    // Initialise subject if missing
+    if (!subjectTopicStats[q.category]) {
+      subjectTopicStats[q.category] = {};
+    }
+
+    // Skip if no topic found
+    if (!q.topic) return;
+
+    // Initialise topic if missing
+    if (!subjectTopicStats[q.category][q.topic]) {
+      subjectTopicStats[q.category][q.topic] = { correct: 0, total: 0 };
+    }
+
+    // Update stats for topics
+    subjectTopicStats[q.category][q.topic].total++;
+    if (isCorrect) {
+      subjectTopicStats[q.category][q.topic].correct++;
+    }
+
+    // Update subject stats
+    subjectTotalCounts[q.category]++;
+    if (isCorrect) {
+      subjectCorrectCounts[q.category]++;
+    }
   });
-  summaryHtml += `</ul>`;
 
-  // Topic summary (only if topics exist)
-  const topicNames = Object.keys(topicStats);
-  if (topicNames.length > 0) {
-    summaryHtml += `<h4>Summary by topic</h4>`;
+  // Build the HTML for the summary
+  let summaryHtml = `<h3>Summary by topic</h3>`;
+
+  Object.keys(subjectTopicStats).forEach(subject => {
+    // Calculate subject percentage
+    const subjectCorrect = subjectCorrectCounts[subject];
+    const subjectTotal = subjectTotalCounts[subject];
+    const subjectPercentage = Math.round((subjectCorrect / subjectTotal) * 100);
+
+    // Display subject with percentage
+    summaryHtml += `<h4>${subject} (${subjectPercentage}%)</h4>`;
     summaryHtml += `<ul class="summary-list">`;
-    topicNames.forEach(topic => {
-      const { correct, total } = topicStats[topic];
-      const percent = total > 0 ? Math.round((correct / total) * 100) : 0;
-      summaryHtml += `<li><strong>${topic}</strong>: ${correct}/${total} correct (${percent}%)</li>`;
+
+    const topics = subjectTopicStats[subject];
+    Object.keys(topics).forEach(topic => {
+      const { correct, total } = topics[topic];
+      const percent = Math.round((correct / total) * 100);
+      const label = TOPIC_LABELS[topic] || topic; // use nice label for topic names
+      summaryHtml += `<li><strong>${label}</strong>: ${correct}/${total} correct (${percent}%)</li>`;
     });
+
     summaryHtml += `</ul>`;
-  }
+  });
 
   summary.innerHTML = summaryHtml;
   reviewList.appendChild(summary);
 }
-
 
 restartBtn.onclick = () => {
   setupQuiz();

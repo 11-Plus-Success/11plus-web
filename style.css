@@ -81,6 +81,19 @@
 }
 
 
+.summary-block h4 {
+  margin-top: 12px;
+  font-size: 15px;
+  color: #1f2937;
+}
+.summary-block h3 {
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+
+
+
 #next-btn,
 #restart-btn {
   margin-top: 15px;
