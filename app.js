@@ -13,6 +13,7 @@ let score = 0;
 let answers = [];      // stores selected option index per question
 let timerId = null;
 let timeLeft = 0;      // seconds
+let quizActive = false;
 
 // ------------- DOM references -------------
 const categorySelect = document.getElementById("category-select");
@@ -49,10 +50,17 @@ function formatTime(seconds) {
   return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 }
 
+function setControlsEnabled(enabled) {
+  categorySelect.disabled = !enabled;
+  numQuestionsInput.disabled = !enabled;
+  timeMinsInput.disabled = !enabled;
+  startBtn.disabled = !enabled || !questionsLoaded;
+}
+
 // ------------- Loading questions from JSON -------------
 function loadAllQuestions() {
   statusMessage.textContent = "Loading questions...";
-  startBtn.disabled = true;
+  setControlsEnabled(false);
 
   return Promise.all([
     fetch("questions/maths.json").then(r => r.json()),
@@ -67,13 +75,13 @@ function loadAllQuestions() {
       nvrQuestions = n;
       questionsLoaded = true;
       statusMessage.textContent = "Questions loaded. Choose settings and press Start.";
-      startBtn.disabled = false;
+      setControlsEnabled(true);
     })
     .catch(err => {
       console.error(err);
       statusMessage.textContent =
         "Error loading question files. Please check that the JSON files exist and are valid.";
-      startBtn.disabled = true;
+      setControlsEnabled(false);
     });
 }
 
@@ -81,17 +89,26 @@ function loadAllQuestions() {
 function startTimer(totalSeconds) {
   clearInterval(timerId);
   timeLeft = totalSeconds;
+  timerSpan.classList.remove("timer-warning");
   timerSpan.textContent = `Time: ${formatTime(timeLeft)}`;
 
   timerId = setInterval(() => {
     timeLeft--;
+
+    // Optional: highlight timer when low
+    if (timeLeft <= 30) {
+      timerSpan.classList.add("timer-warning");
+    }
+
     if (timeLeft < 0) {
       clearInterval(timerId);
       timerId = null;
+      timeLeft = 0;
       timerSpan.textContent = "Time: 00:00";
       showResult(true); // time up
       return;
     }
+
     timerSpan.textContent = `Time: ${formatTime(timeLeft)}`;
   }, 1000);
 }
@@ -145,6 +162,10 @@ function setupQuiz() {
   currentIndex = 0;
   score = 0;
   answers = [];
+  quizActive = true;
+
+  // Lock controls while quiz is running
+  setControlsEnabled(false);
 
   // Show quiz box, hide result box
   quizBox.style.display = "block";
@@ -164,6 +185,7 @@ function showQuestion() {
   if (!q) return;
 
   selectedOption = null;
+  nextBtn.disabled = true; // require a choice before moving on
 
   questionText.textContent = `(${q.category}) ${q.question}`;
   optionsDiv.innerHTML = "";
@@ -178,6 +200,7 @@ function showQuestion() {
         .querySelectorAll(".option-btn")
         .forEach(b => b.classList.remove("selected"));
       btn.classList.add("selected");
+      nextBtn.disabled = false;
     };
     optionsDiv.appendChild(btn);
   });
@@ -187,6 +210,10 @@ function showQuestion() {
 
 // ------------- Handling answers -------------
 nextBtn.onclick = () => {
+  if (!quizActive) {
+    return;
+  }
+
   if (timerId === null && timeLeft <= 0) {
     // already timed out and results shown
     return;
@@ -215,8 +242,13 @@ nextBtn.onclick = () => {
 // ------------- Results & review -------------
 function showResult(timeUp) {
   stopTimer();
+  quizActive = false;
+
   quizBox.style.display = "none";
   resultBox.style.display = "block";
+
+  // Re-enable controls for a fresh quiz
+  setControlsEnabled(true);
 
   if (timeUp) {
     scoreText.textContent = `Time's up! You scored ${score} out of ${quizQuestions.length}.`;
