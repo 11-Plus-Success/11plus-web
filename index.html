@@ -37,12 +37,21 @@
       </div>
 
       <div class="control-group">
-        <label for="num-questions">Questions</label>
+        <label for="num-questions">Number of questions:</label>
         <input id="num-questions" type="number" min="1" max="50" value="10" />
       </div>
 
       <div class="control-group">
-        <label for="time-mins">Time (mins)</label>
+        <label for="mode-select">Mode:</label>
+        <select id="mode-select">
+         <option value="practice">Practice (no timer)</option>
+         <option value="exam" selected>Exam (timed)</option>
+        </select>
+      </div>      
+
+
+      <div class="control-group">
+        <label for="time-mins">Time limit (mins):</label>
         <input id="time-mins" type="number" min="1" max="60" value="10" />
       </div>
 

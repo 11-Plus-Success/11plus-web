@@ -14,11 +14,13 @@ let answers = [];      // stores selected option index per question
 let timerId = null;
 let timeLeft = 0;      // seconds
 let quizActive = false;
+let currentMode = "exam"; // "practice" or "exam"
 
 // ------------- DOM references -------------
 const categorySelect = document.getElementById("category-select");
 const numQuestionsInput = document.getElementById("num-questions");
 const timeMinsInput = document.getElementById("time-mins");
+const modeSelect = document.getElementById("mode-select");
 const startBtn = document.getElementById("start-btn");
 const timerSpan = document.getElementById("timer");
 const statusMessage = document.getElementById("status-message");
@@ -54,6 +56,7 @@ function setControlsEnabled(enabled) {
   categorySelect.disabled = !enabled;
   numQuestionsInput.disabled = !enabled;
   timeMinsInput.disabled = !enabled;
+  modeSelect.disabled = !enabled;
   startBtn.disabled = !enabled || !questionsLoaded;
 }
 
@@ -142,8 +145,9 @@ function setupQuiz() {
   const subject = categorySelect.value;
   let numQuestions = Number(numQuestionsInput.value) || 10;
   const timeMins = Number(timeMinsInput.value) || 10;
-
   const pool = getPoolForSubject(subject);
+
+  currentMode = modeSelect.value; // "practice" or "exam"
 
   if (!pool || pool.length === 0) {
     alert("No questions available for this subject.");
@@ -174,7 +178,15 @@ function setupQuiz() {
   statusMessage.textContent = "";
 
   showQuestion();
-  startTimer(timeMins * 60);
+
+  if (currentMode === "exam") {
+    startTimer(timeMins * 60);
+  } else {
+    // Practice mode: no timer
+    stopTimer();
+    timerSpan.classList.remove("timer-warning");
+    timerSpan.textContent = "Practice mode: no time limit";
+  }
 }
 
 // ------------- Rendering questions -------------
@@ -214,7 +226,7 @@ nextBtn.onclick = () => {
     return;
   }
 
-  if (timerId === null && timeLeft <= 0) {
+  if (currentMode === "exam" && timerId === null && timeLeft <= 0) {
     // already timed out and results shown
     return;
   }
@@ -258,6 +270,10 @@ function showResult(timeUp) {
 
   reviewList.innerHTML = "";
 
+  // --- NEW: stats objects ---
+  const categoryStats = {}; // { "Maths": {correct, total}, ... }
+  const topicStats = {};    // { "Fractions": {correct, total}, ... } if q.topic exists
+
   quizQuestions.forEach((q, index) => {
     const chosenIndex = answers[index];
     const userAnswerText =
@@ -265,6 +281,7 @@ function showResult(timeUp) {
     const correctAnswerText = q.options[q.answerIndex];
     const isCorrect = chosenIndex === q.answerIndex;
 
+    // --- Build per-question review item (existing behaviour) ---
     const item = document.createElement("div");
     item.className = "review-item";
 
@@ -287,8 +304,63 @@ function showResult(timeUp) {
     `;
 
     reviewList.appendChild(item);
+
+    // --- NEW: accumulate stats by category ---
+    const cat = q.category || "Other";
+    if (!categoryStats[cat]) {
+      categoryStats[cat] = { correct: 0, total: 0 };
+    }
+    categoryStats[cat].total += 1;
+    if (isCorrect) {
+      categoryStats[cat].correct += 1;
+    }
+
+    // --- NEW: accumulate stats by topic (if present in JSON) ---
+    if (q.topic) {
+      const topic = q.topic;
+      if (!topicStats[topic]) {
+        topicStats[topic] = { correct: 0, total: 0 };
+      }
+      topicStats[topic].total += 1;
+      if (isCorrect) {
+        topicStats[topic].correct += 1;
+      }
+    }
   });
+
+  // --- NEW: summary block appended after the detailed review ---
+  const summary = document.createElement("div");
+  summary.className = "summary-block";
+
+  let summaryHtml = "";
+
+  // Subject summary
+  summaryHtml += `<h4>Summary by subject</h4>`;
+  summaryHtml += `<ul class="summary-list">`;
+  Object.keys(categoryStats).forEach(cat => {
+    const { correct, total } = categoryStats[cat];
+    const percent = total > 0 ? Math.round((correct / total) * 100) : 0;
+    summaryHtml += `<li><strong>${cat}</strong>: ${correct}/${total} correct (${percent}%)</li>`;
+  });
+  summaryHtml += `</ul>`;
+
+  // Topic summary (only if topics exist)
+  const topicNames = Object.keys(topicStats);
+  if (topicNames.length > 0) {
+    summaryHtml += `<h4>Summary by topic</h4>`;
+    summaryHtml += `<ul class="summary-list">`;
+    topicNames.forEach(topic => {
+      const { correct, total } = topicStats[topic];
+      const percent = total > 0 ? Math.round((correct / total) * 100) : 0;
+      summaryHtml += `<li><strong>${topic}</strong>: ${correct}/${total} correct (${percent}%)</li>`;
+    });
+    summaryHtml += `</ul>`;
+  }
+
+  summary.innerHTML = summaryHtml;
+  reviewList.appendChild(summary);
 }
+
 
 restartBtn.onclick = () => {
   setupQuiz();
