@@ -1,6 +1,7 @@
 [
   {
     "category": "English",
+    "topic": "grammar",
     "question": "Choose the correct word: Although it was raining, they decided to ____ to the park.",
     "options": ["gone", "going", "go", "goes"],
     "answerIndex": 2,
@@ -8,6 +9,7 @@
   },
   {
     "category": "English",
+    "topic": "synonyms",
     "question": "Select the synonym of 'brave'.",
     "options": ["cowardly", "strong", "fearless", "weak"],
     "answerIndex": 2,
@@ -15,6 +17,7 @@
   },
   {
     "category": "English",
+    "topic": "antonyms",
     "question": "Choose the best antonym for 'ancient'.",
     "options": ["old", "historic", "modern", "ruined"],
     "answerIndex": 2,
@@ -22,6 +25,7 @@
   },
   {
     "category": "English",
+    "topic": "punctuation",
     "question": "Which sentence is punctuated correctly?",
     "options": [
       "my friend Tom said lets play football.",
@@ -34,6 +38,7 @@
   },
   {
     "category": "English",
+    "topic": "grammar",
     "question": "Choose the correct form: She has ____ her homework.",
     "options": ["do", "did", "done", "does"],
     "answerIndex": 2,
@@ -41,6 +46,7 @@
   },
   {
     "category": "English",
+    "topic": "nouns",
     "question": "Which word is a noun?",
     "options": ["quickly", "beautiful", "happiness", "run"],
     "answerIndex": 2,
@@ -48,6 +54,7 @@
   },
   {
     "category": "English",
+    "topic": "adjectives",
     "question": "Which word best completes the sentence? 'He spoke in a very ____ voice.'",
     "options": ["softly", "soft", "softer", "softest"],
     "answerIndex": 1,
@@ -55,6 +62,7 @@
   },
   {
     "category": "English",
+    "topic": "punctuation",
     "question": "Which sentence uses the apostrophe correctly?",
     "options": [
       "The dogs bone was buried.",
@@ -67,6 +75,7 @@
   },
   {
     "category": "English",
+    "topic": "spelling",
     "question": "Choose the correctly spelled word.",
     "options": ["definately", "definitely", "definatly", "definitly"],
     "answerIndex": 1,
@@ -74,6 +83,7 @@
   },
   {
     "category": "English",
+    "topic": "synonyms",
     "question": "Which word best replaces the underlined word? 'The film was very good.'",
     "options": ["boring", "excellent", "tiny", "careful"],
     "answerIndex": 1,
@@ -81,6 +91,7 @@
   },
   {
     "category": "English",
+    "topic": "adverbs",
     "question": "Which word is an adverb?",
     "options": ["slow", "slowly", "slowness", "slower"],
     "answerIndex": 1,
@@ -88,6 +99,7 @@
   },
   {
     "category": "English",
+    "topic": "synonyms",
     "question": "Which word is a synonym of 'begin'?",
     "options": ["end", "start", "finish", "stop"],
     "answerIndex": 1,
@@ -95,6 +107,7 @@
   },
   {
     "category": "English",
+    "topic": "antonyms",
     "question": "Choose the best antonym for 'polite'.",
     "options": ["kind", "rude", "happy", "shy"],
     "answerIndex": 1,
@@ -102,6 +115,7 @@
   },
   {
     "category": "English",
+    "topic": "verb-tenses",
     "question": "Which sentence is written in the past tense?",
     "options": [
       "I walk to school.",
@@ -114,6 +128,7 @@
   },
   {
     "category": "English",
+    "topic": "conjunctions",
     "question": "Which word is a conjunction?",
     "options": ["and", "under", "quickly", "blue"],
     "answerIndex": 0,
@@ -121,6 +136,7 @@
   },
   {
     "category": "English",
+    "topic": "punctuation",
     "question": "Choose the correctly punctuated sentence.",
     "options": [
       "Where are you going.",
@@ -133,6 +149,7 @@
   },
   {
     "category": "English",
+    "topic": "verbs",
     "question": "Which word is the verb in this sentence: 'The cat slept on the mat.'",
     "options": ["cat", "slept", "on", "mat"],
     "answerIndex": 1,
@@ -140,6 +157,7 @@
   },
   {
     "category": "English",
+    "topic": "synonyms",
     "question": "Which word is closest in meaning to 'silent'?",
     "options": ["noisy", "quiet", "busy", "angry"],
     "answerIndex": 1,
@@ -147,6 +165,7 @@
   },
   {
     "category": "English",
+    "topic": "homophones",
     "question": "Choose the correct homophone: 'I want to ____ this book.'",
     "options": ["by", "buy", "bye", "bee"],
     "answerIndex": 1,
@@ -154,6 +173,7 @@
   },
   {
     "category": "English",
+    "topic": "punctuation",
     "question": "Which sentence uses commas correctly in a list?",
     "options": [
       "I bought apples bananas and oranges.",

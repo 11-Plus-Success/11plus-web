@@ -1,6 +1,7 @@
 [
   {
     "category": "NVR",
+    "topic": "shape-sequences",
     "question": "Which shape completes the alternating pattern: ⬜ ⬛ ⬜ ⬛ ⬜ ⬛ ?",
     "options": ["⬜", "⬛", "⬜⬛", "⬛⬜"],
     "answerIndex": 0,
@@ -8,6 +9,7 @@
   },
   {
     "category": "NVR",
+    "topic": "odd-one-out-shapes",
     "question": "Find the odd one out: 🟠 🔵 🟢 🟣 🟪",
     "options": ["🟠", "🔵", "🟢", "🟪"],
     "answerIndex": 3,
@@ -15,6 +17,7 @@
   },
   {
     "category": "NVR",
+    "topic": "shape-properties",
     "question": "Which shape has the fewest sides?",
     "options": ["Triangle", "Square", "Pentagon", "Hexagon"],
     "answerIndex": 0,
@@ -22,6 +25,7 @@
   },
   {
     "category": "NVR",
+    "topic": "rotations-and-reflections",
     "question": "A black arrow points up. It is rotated 90° clockwise. Which way does it point now?",
     "options": ["Up", "Down", "Left", "Right"],
     "answerIndex": 3,
@@ -29,6 +33,7 @@
   },
   {
     "category": "NVR",
+    "topic": "shape-sequences",
     "question": "Pattern: ▲ ▼ ▲ ▼ ▲ ? What comes next?",
     "options": ["▲", "▼", "▲▼", "▼▲"],
     "answerIndex": 1,
@@ -36,6 +41,7 @@
   },
   {
     "category": "NVR",
+    "topic": "odd-one-out-shapes",
     "question": "Which is the odd one out?",
     "options": ["⬜", "🔺", "⚫", "⬛"],
     "answerIndex": 1,
@@ -43,6 +49,7 @@
   },
   {
     "category": "NVR",
+    "topic": "rotations-and-reflections",
     "question": "A shape is shaded on the left half. It is reflected in a vertical mirror line. Which half is shaded now?",
     "options": ["Left half", "Right half", "Both halves", "Neither half"],
     "answerIndex": 1,
@@ -50,6 +57,7 @@
   },
   {
     "category": "NVR",
+    "topic": "shape-sequences",
     "question": "Sequence of sides: triangle (3), square (4), pentagon (5), hexagon (6), ?",
     "options": ["Triangle", "Square", "Pentagon", "Heptagon"],
     "answerIndex": 3,
@@ -57,6 +65,7 @@
   },
   {
     "category": "NVR",
+    "topic": "shape-sequences",
     "question": "Circles are arranged: 1 black, 2 white, 3 black, 4 white, 5 black, ?. What comes next?",
     "options": ["White", "Black", "Striped", "Empty"],
     "answerIndex": 0,
@@ -64,6 +73,7 @@
   },
   {
     "category": "NVR",
+    "topic": "nets-and-3d",
     "question": "Which net could fold to make a cube?",
     "options": [
       "Six squares in a straight line",
@@ -76,6 +86,7 @@
   },
   {
     "category": "NVR",
+    "topic": "shape-sequences",
     "question": "In a row of shapes, each next shape adds one more dot: ●, ●●, ●●●, ●●●●, ?. What comes next?",
     "options": ["●", "●●●", "●●●●●", "●●●●●●"],
     "answerIndex": 2,
@@ -83,6 +94,7 @@
   },
   {
     "category": "NVR",
+    "topic": "rotations-and-reflections",
     "question": "A square is divided by a diagonal line from top-left to bottom-right. The top half is shaded. If rotated 90° clockwise, which part is shaded now?",
     "options": ["Left half", "Right half", "Top half", "Bottom half"],
     "answerIndex": 3,
@@ -90,6 +102,7 @@
   },
   {
     "category": "NVR",
+    "topic": "odd-one-out-shapes",
     "question": "Which is the odd one out?",
     "options": ["◆", "◇", "⬟", "⬢"],
     "answerIndex": 1,
@@ -97,6 +110,7 @@
   },
   {
     "category": "NVR",
+    "topic": "shape-sequences",
     "question": "A pattern of arrows is: →, ↑, ←, ↓, →, ?. What comes next?",
     "options": ["↑", "←", "↓", "→"],
     "answerIndex": 0,
@@ -104,6 +118,7 @@
   },
   {
     "category": "NVR",
+    "topic": "shape-sequences",
     "question": "A row of shapes alternates between circles and squares: ○, □, ○, □, ○, ?. What comes next?",
     "options": ["○", "□", "○□", "□○"],
     "answerIndex": 1,
@@ -111,6 +126,7 @@
   },
   {
     "category": "NVR",
+    "topic": "rotations-and-reflections",
     "question": "Which shape is most like a mirror image of a 'L' shape?",
     "options": ["Γ", "T", "I", "O"],
     "answerIndex": 0,
@@ -118,6 +134,7 @@
   },
   {
     "category": "NVR",
+    "topic": "shape-sequences",
     "question": "In a pattern, each black square is followed by two white squares: ■, □, □, ■, □, □, ?. What comes next?",
     "options": ["■", "□", "■, □", "□, □"],
     "answerIndex": 0,
@@ -125,6 +142,7 @@
   },
   {
     "category": "NVR",
+    "topic": "odd-one-out-shapes",
     "question": "Which is the odd one out?",
     "options": ["⚪", "⚫", "⬤", "⬛"],
     "answerIndex": 3,
@@ -132,6 +150,7 @@
   },
   {
     "category": "NVR",
+    "topic": "rotations-and-reflections",
     "question": "A clock face is rotated 180°. Where does the 12 move to?",
     "options": ["3 o'clock position", "6 o'clock position", "9 o'clock position", "Stays at top"],
     "answerIndex": 1,
@@ -139,6 +158,7 @@
   },
   {
     "category": "NVR",
+    "topic": "shape-sequences",
     "question": "In a sequence of shapes, each next shape has one more side: triangle, square, pentagon, hexagon, ?. What comes next?",
     "options": ["Triangle", "Square", "Heptagon", "Octagon"],
     "answerIndex": 2,

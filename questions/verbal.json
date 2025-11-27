@@ -1,6 +1,7 @@
 [
   {
     "category": "Verbal",
+    "topic": "antonyms",
     "question": "Find the two words most opposite in meaning.",
     "options": [
       "happy & sad",
@@ -13,6 +14,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "word-analogies",
     "question": "book : read :: fork : ____",
     "options": ["eat", "cook", "stab", "wash"],
     "answerIndex": 0,
@@ -20,6 +22,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "odd-one-out-words",
     "question": "Which word does NOT belong?",
     "options": ["cat", "dog", "rabbit", "fox", "parrot"],
     "answerIndex": 4,
@@ -27,6 +30,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "synonyms",
     "question": "Choose the pair that means the same: 'silent : ____'",
     "options": ["loud", "noisy", "quiet", "busy"],
     "answerIndex": 2,
@@ -34,6 +38,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "odd-one-out-words",
     "question": "Find the odd one out.",
     "options": ["teacher", "doctor", "nurse", "hospital"],
     "answerIndex": 3,
@@ -41,6 +46,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "word-relations",
     "question": "Which word can go in front of all these: 'room', 'time', 'light'?",
     "options": ["bed", "day", "night", "air"],
     "answerIndex": 1,
@@ -48,13 +54,15 @@
   },
   {
     "category": "Verbal",
-    "question": "REAP is to PEAR as EVIL is to ____.",
+    "topic": "word-codes",
+    "question": "REAP is to PEAR as EVIL is to ____. ",
     "options": ["VILE", "LIVE", "VEIL", "VILE or LIVE"],
     "answerIndex": 3,
     "explanation": "PEAR is an anagram of REAP; VILE and LIVE are common anagrams of EVIL."
   },
   {
     "category": "Verbal",
+    "topic": "synonyms",
     "question": "Which of these is a synonym of 'tidy'?",
     "options": ["messy", "neat", "untidy", "dirty"],
     "answerIndex": 1,
@@ -62,6 +70,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "word-analogies",
     "question": "Complete the analogy: 'cold : freezing :: warm : ____'",
     "options": ["hot", "boiling", "cool", "burning"],
     "answerIndex": 0,
@@ -69,6 +78,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "compound-words",
     "question": "Which word is a compound word?",
     "options": ["house", "sun", "football", "rain"],
     "answerIndex": 2,
@@ -76,6 +86,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "odd-one-out-words",
     "question": "Which word does NOT belong?",
     "options": ["table", "chair", "sofa", "banana"],
     "answerIndex": 3,
@@ -83,6 +94,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "antonyms",
     "question": "Choose the pair that means the opposite: 'kind : ____'",
     "options": ["gentle", "helpful", "cruel", "friendly"],
     "answerIndex": 2,
@@ -90,6 +102,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "synonyms",
     "question": "Which word is a synonym of 'angry'?",
     "options": ["calm", "furious", "sleepy", "hungry"],
     "answerIndex": 1,
@@ -97,6 +110,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "word-sequences",
     "question": "Which word completes the pattern? 'tiny, small, medium, large, ____'",
     "options": ["short", "thin", "huge", "wide"],
     "answerIndex": 2,
@@ -104,6 +118,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "synonyms",
     "question": "Which pair is most similar in meaning?",
     "options": [
       "quick and slow",
@@ -116,6 +131,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "odd-one-out-words",
     "question": "Find the odd one out.",
     "options": ["January", "March", "Summer", "May"],
     "answerIndex": 2,
@@ -123,6 +139,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "word-analogies",
     "question": "Complete the analogy: 'hand : glove :: foot : ____'",
     "options": ["shoe", "sock", "sandals", "boot"],
     "answerIndex": 1,
@@ -130,6 +147,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "synonyms",
     "question": "Which word is a synonym of 'clever'?",
     "options": ["foolish", "intelligent", "noisy", "clumsy"],
     "answerIndex": 1,
@@ -137,6 +155,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "odd-one-out-words",
     "question": "Which word does NOT belong?",
     "options": ["triangle", "square", "circle", "cube"],
     "answerIndex": 3,
@@ -144,6 +163,7 @@
   },
   {
     "category": "Verbal",
+    "topic": "word-analogies",
     "question": "Find the pair that is related in the same way as 'bird : nest'.",
     "options": [
       "dog : bone",
