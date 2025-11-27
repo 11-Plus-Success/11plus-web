@@ -4,95 +4,116 @@
   <meta charset="UTF-8" />
   <title>11+ Practice Quiz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- You can keep using your existing CSS file -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="site-header">
-    <h1>11+ Practice Quiz</h1>
-    <p class="tagline">Practice timed questions for Maths, English, Verbal & NVR.</p>
-  </header>
+  <div class="page">
+    <header class="site-header">
+      <h1>11+ Practice Quiz</h1>
+      <p class="tagline">Timed practice for Maths, English, Verbal and NVR.</p>
+    </header>
 
-  <main class="container">
-    <!-- Instructions -->
-    <section class="intro">
-      <p>
-        Choose a subject, number of questions and time. 
-        When you’re ready, press <strong>Start</strong>. At the end you’ll see your score and a review of each question.
-      </p>
+    <!-- Auth area -->
+    <section id="auth-box">
+      <h2>Sign in</h2>
+      <p id="auth-error" class="status-message"></p>
+
+      <div class="auth-row">
+        <label for="auth-email">Email:</label>
+        <input type="email" id="auth-email" />
+      </div>
+
+      <div class="auth-row">
+        <label for="auth-password">Password:</label>
+        <input type="password" id="auth-password" />
+      </div>
+
+      <div class="auth-buttons">
+        <button id="login-btn">Log in</button>
+        <button id="register-btn">Register</button>
+        <button id="logout-btn" style="display:none;">Log out</button>
+      </div>
+
+      <p id="auth-status"></p>
     </section>
+
+    <!-- Instructions -->
+    <p class="intro">
+      After signing in, choose a subject, number of questions and mode. Press <strong>Start</strong> to begin.
+    </p>
 
     <!-- Controls / Settings -->
-    <section id="controls" class="controls">
-      <div class="control-group">
-        <label for="category-select">Subject</label>
-        <select id="category-select">
-          <option value="all">All subjects</option>
-          <option value="Maths">Maths</option>
-          <option value="English">English</option>
-          <option value="Verbal">Verbal</option>
-          <option value="NVR">Non-Verbal (NVR)</option>
-        </select>
-      </div>
+    <div id="controls" style="display:none;">
+      <label for="category-select">Subject:</label>
+      <select id="category-select">
+        <option value="all">All subjects</option>
+        <option value="Maths">Maths</option>
+        <option value="English">English</option>
+        <option value="Verbal">Verbal</option>
+        <option value="NVR">Non-Verbal (NVR)</option>
+      </select>
 
-      <div class="control-group">
-        <label for="num-questions">Number of questions:</label>
-        <input id="num-questions" type="number" min="1" max="50" value="10" />
-      </div>
+      <label for="num-questions">Questions:</label>
+      <input id="num-questions" type="number" min="1" max="50" value="10" />
 
-      <div class="control-group">
-        <label for="mode-select">Mode:</label>
-        <select id="mode-select">
-         <option value="practice">Practice (no timer)</option>
-         <option value="exam" selected>Exam (timed)</option>
-        </select>
-      </div>      
+      <label for="mode-select">Mode:</label>
+      <select id="mode-select">
+        <option value="practice">Practice (no timer)</option>
+        <option value="exam" selected>Exam (timed)</option>
+      </select>
 
+      <label for="time-mins">Time (mins):</label>
+      <input id="time-mins" type="number" min="1" max="60" value="10" />
 
-      <div class="control-group">
-        <label for="time-mins">Time limit (mins):</label>
-        <input id="time-mins" type="number" min="1" max="60" value="10" />
-      </div>
+      <button id="start-btn">Start</button>
 
-      <div class="control-group control-actions">
-        <button id="start-btn">Start</button>
-        <span id="timer" aria-live="polite">Time: 00:00</span>
-      </div>
-    </section>
+      <span id="timer">Time: 00:00</span>
+    </div>
 
-    <div id="status-message" class="status-message" aria-live="polite"></div>
+    <div id="status-message"></div>
 
     <!-- Quiz area -->
-    <section id="quiz-box" class="card quiz-box" style="display:none;">
-      <div class="quiz-header">
-        <div id="progress" class="progress-text">Question 0 of 0</div>
-      </div>
-
-      <div id="question-text" class="question-text"></div>
-
-      <div id="options" class="options"></div>
-
-      <div class="quiz-footer">
-        <button id="next-btn">Next</button>
-      </div>
-    </section>
+    <div id="quiz-box" style="display:none;">
+      <div id="question-text"></div>
+      <div id="options"></div>
+      <button id="next-btn">Next</button>
+      <div id="progress"></div>
+    </div>
 
     <!-- Results / review -->
-    <section id="result-box" class="card result-box" style="display:none;">
+    <div id="result-box" style="display:none;">
       <h2>Your Score</h2>
-      <p id="score-text" class="score-text"></p>
+      <p id="score-text"></p>
 
-      <h3>Review your answers</h3>
-      <div id="review-list" class="review-list"></div>
+      <h3>Review</h3>
+      <div id="review-list"></div>
 
       <button id="restart-btn">Try Again</button>
-    </section>
-  </main>
+    </div>
 
-  <footer class="site-footer">
-    <small>11+ Practice Quiz &middot; v1.0</small>
-  </footer>
+    <footer class="site-footer">
+      <small>11+ Practice Quiz · v1.0</small>
+    </footer>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-auth-compat.js"></script>
+
+  <script>
+    // TODO: Replace this with your Firebase project's config
+    // Get it from Firebase console: Project Settings → General → Your apps → Web app
+    const firebaseConfig = {
+      apiKey: "AIzaSyClwVV_qZzRNyCFUig3wj1ZObpy74Njv5E",
+     authDomain: "plus-web-66870.firebaseapp.com",
+     projectId: "plus-web-66870",
+     storageBucket: "plus-web-66870.firebasestorage.app",
+     messagingSenderId: "350922929918",
+     appId: "1:350922929918:web:c744dae36446676dbb17af"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+  </script>
 
   <script src="app.js"></script>
 </body>

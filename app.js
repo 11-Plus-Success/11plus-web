@@ -25,6 +25,7 @@ const startBtn = document.getElementById("start-btn");
 const timerSpan = document.getElementById("timer");
 const statusMessage = document.getElementById("status-message");
 
+const controlsBox = document.getElementById("controls");
 const quizBox = document.getElementById("quiz-box");
 const questionText = document.getElementById("question-text");
 const optionsDiv = document.getElementById("options");
@@ -36,9 +37,22 @@ const scoreText = document.getElementById("score-text");
 const reviewList = document.getElementById("review-list");
 const restartBtn = document.getElementById("restart-btn");
 
+// Auth-related DOM references
+const authBox = document.getElementById("auth-box");
+const authEmail = document.getElementById("auth-email");
+const authPassword = document.getElementById("auth-password");
+const authError = document.getElementById("auth-error");
+const authStatus = document.getElementById("auth-status");
+const loginBtn = document.getElementById("login-btn");
+const registerBtn = document.getElementById("register-btn");
+const logoutBtn = document.getElementById("logout-btn");
+
+// Firebase auth handle
+const auth = firebase.auth();
 
 // Map internal topic codes → nice readable labels
 const TOPIC_LABELS = {
+  // Maths
   "arithmetic": "Arithmetic",
   "fractions": "Fractions",
   "percentages": "Percentages",
@@ -78,7 +92,6 @@ const TOPIC_LABELS = {
   "shape-properties": "Shape Properties",
   "nets-and-3d": "Nets & 3D Shapes"
 };
-
 
 // ------------- Utility functions -------------
 function shuffle(array) {
@@ -122,7 +135,11 @@ function loadAllQuestions() {
       nvrQuestions = n;
       questionsLoaded = true;
       statusMessage.textContent = "Questions loaded. Choose settings and press Start.";
-      setControlsEnabled(true);
+
+      // Only enable controls if user is signed in
+      if (auth.currentUser) {
+        setControlsEnabled(true);
+      }
     })
     .catch(err => {
       console.error(err);
@@ -142,7 +159,6 @@ function startTimer(totalSeconds) {
   timerId = setInterval(() => {
     timeLeft--;
 
-    // Optional: highlight timer when low
     if (timeLeft <= 30) {
       timerSpan.classList.add("timer-warning");
     }
@@ -186,6 +202,11 @@ function setupQuiz() {
     return;
   }
 
+  if (!auth.currentUser) {
+    alert("Please sign in before starting the quiz.");
+    return;
+  }
+
   const subject = categorySelect.value;
   let numQuestions = Number(numQuestionsInput.value) || 10;
   const timeMins = Number(timeMinsInput.value) || 10;
@@ -202,7 +223,6 @@ function setupQuiz() {
     numQuestions = pool.length;
   }
 
-  // Shuffle and slice
   const shuffled = shuffle(pool);
   quizQuestions = shuffled.slice(0, numQuestions);
 
@@ -266,9 +286,7 @@ function showQuestion() {
 
 // ------------- Handling answers -------------
 nextBtn.onclick = () => {
-  if (!quizActive) {
-    return;
-  }
+  if (!quizActive) return;
 
   if (currentMode === "exam" && timerId === null && timeLeft <= 0) {
     // already timed out and results shown
@@ -304,7 +322,9 @@ function showResult(timeUp) {
   resultBox.style.display = "block";
 
   // Re-enable controls for a fresh quiz
-  setControlsEnabled(true);
+  if (auth.currentUser) {
+    setControlsEnabled(true);
+  }
 
   if (timeUp) {
     scoreText.textContent = `Time's up! You scored ${score} out of ${quizQuestions.length}.`;
@@ -314,11 +334,10 @@ function showResult(timeUp) {
 
   reviewList.innerHTML = "";
 
-  // --- NEW: stats objects ---
-  const categoryStats = {}; // { "Maths": {correct, total}, ... }
-  const topicStats = {};    // { "Fractions": {correct, total}, ... } if q.topic exists
-  const subjectCorrectCounts = {}; // track correct answers per subject
-  const subjectTotalCounts = {};   // track total questions per subject
+  // Stats per subject and topic
+  const subjectTopicStats = {};   // { "Maths": { "fractions": {correct,total}, ... }, ... }
+  const subjectCorrectCounts = {}; // { "Maths": 5, ... }
+  const subjectTotalCounts = {};   // { "Maths": 7, ... }
 
   quizQuestions.forEach((q, index) => {
     const chosenIndex = answers[index];
@@ -327,7 +346,7 @@ function showResult(timeUp) {
     const correctAnswerText = q.options[q.answerIndex];
     const isCorrect = chosenIndex === q.answerIndex;
 
-    // --- Build per-question review item (existing behaviour) ---
+    // Per-question review UI
     const item = document.createElement("div");
     item.className = "review-item";
 
@@ -351,94 +370,54 @@ function showResult(timeUp) {
 
     reviewList.appendChild(item);
 
-    // --- NEW: accumulate stats by category ---
-    const cat = q.category || "Other";
-    if (!categoryStats[cat]) {
-      categoryStats[cat] = { correct: 0, total: 0 };
-    }
-    categoryStats[cat].total += 1;
-    if (isCorrect) {
-      categoryStats[cat].correct += 1;
+    const subject = q.category || "Other";
+
+    // Init subject stats if needed
+    if (!subjectTopicStats[subject]) {
+      subjectTopicStats[subject] = {};
+      subjectCorrectCounts[subject] = 0;
+      subjectTotalCounts[subject] = 0;
     }
 
-    // --- NEW: accumulate stats by topic (if present in JSON) ---
+    // Update subject totals
+    subjectTotalCounts[subject]++;
+    if (isCorrect) {
+      subjectCorrectCounts[subject]++;
+    }
+
+    // Update topic stats (if topic exists)
     if (q.topic) {
       const topic = q.topic;
-      if (!topicStats[topic]) {
-        topicStats[topic] = { correct: 0, total: 0 };
+      if (!subjectTopicStats[subject][topic]) {
+        subjectTopicStats[subject][topic] = { correct: 0, total: 0 };
       }
-      topicStats[topic].total += 1;
+      subjectTopicStats[subject][topic].total++;
       if (isCorrect) {
-        topicStats[topic].correct += 1;
+        subjectTopicStats[subject][topic].correct++;
       }
-    }
-
-    // --- NEW: accumulate stats by subject ---
-    if (!subjectCorrectCounts[q.category]) {
-      subjectCorrectCounts[q.category] = 0;
-      subjectTotalCounts[q.category] = 0;
-    }
-    subjectTotalCounts[q.category]++;
-    if (isCorrect) {
-      subjectCorrectCounts[q.category]++;
     }
   });
 
-  // --- NEW: Summary grouped by subject → topic ---
+  // Build summary HTML
   const summary = document.createElement("div");
   summary.className = "summary-block";
 
-  // Build nested stats: subject → topic
-  const subjectTopicStats = {};
-
-  quizQuestions.forEach((q, index) => {
-    const chosenIndex = answers[index];
-    const isCorrect = chosenIndex === q.answerIndex;
-
-    // Initialise subject if missing
-    if (!subjectTopicStats[q.category]) {
-      subjectTopicStats[q.category] = {};
-    }
-
-    // Skip if no topic found
-    if (!q.topic) return;
-
-    // Initialise topic if missing
-    if (!subjectTopicStats[q.category][q.topic]) {
-      subjectTopicStats[q.category][q.topic] = { correct: 0, total: 0 };
-    }
-
-    // Update stats for topics
-    subjectTopicStats[q.category][q.topic].total++;
-    if (isCorrect) {
-      subjectTopicStats[q.category][q.topic].correct++;
-    }
-
-    // Update subject stats
-    subjectTotalCounts[q.category]++;
-    if (isCorrect) {
-      subjectCorrectCounts[q.category]++;
-    }
-  });
-
-  // Build the HTML for the summary
   let summaryHtml = `<h3>Summary by topic</h3>`;
 
   Object.keys(subjectTopicStats).forEach(subject => {
-    // Calculate subject percentage
-    const subjectCorrect = subjectCorrectCounts[subject];
-    const subjectTotal = subjectTotalCounts[subject];
-    const subjectPercentage = Math.round((subjectCorrect / subjectTotal) * 100);
+    const subjectCorrect = subjectCorrectCounts[subject] || 0;
+    const subjectTotal = subjectTotalCounts[subject] || 0;
+    const subjectPercentage =
+      subjectTotal > 0 ? Math.round((subjectCorrect / subjectTotal) * 100) : 0;
 
-    // Display subject with percentage
     summaryHtml += `<h4>${subject} (${subjectPercentage}%)</h4>`;
     summaryHtml += `<ul class="summary-list">`;
 
     const topics = subjectTopicStats[subject];
     Object.keys(topics).forEach(topic => {
       const { correct, total } = topics[topic];
-      const percent = Math.round((correct / total) * 100);
-      const label = TOPIC_LABELS[topic] || topic; // use nice label for topic names
+      const percent = total > 0 ? Math.round((correct / total) * 100) : 0;
+      const label = TOPIC_LABELS[topic] || topic;
       summaryHtml += `<li><strong>${label}</strong>: ${correct}/${total} correct (${percent}%)</li>`;
     });
 
@@ -452,6 +431,62 @@ function showResult(timeUp) {
 restartBtn.onclick = () => {
   setupQuiz();
 };
+
+// ------------- Auth handlers -------------
+loginBtn.onclick = () => {
+  authError.textContent = "";
+  auth
+    .signInWithEmailAndPassword(authEmail.value, authPassword.value)
+    .catch(err => {
+      authError.textContent = err.message;
+    });
+};
+
+registerBtn.onclick = () => {
+  authError.textContent = "";
+  auth
+    .createUserWithEmailAndPassword(authEmail.value, authPassword.value)
+    .catch(err => {
+      authError.textContent = err.message;
+    });
+};
+
+logoutBtn.onclick = () => {
+  auth.signOut();
+};
+
+// React to auth state changes
+auth.onAuthStateChanged(user => {
+  if (user) {
+    authStatus.textContent = `Signed in as ${user.email}`;
+    authError.textContent = "";
+    logoutBtn.style.display = "inline-block";
+    loginBtn.style.display = "inline-block"; // you can also hide login/register if you prefer
+    registerBtn.style.display = "inline-block";
+
+    // Show controls box
+    controlsBox.style.display = "flex";
+
+    // Enable controls only if questions are loaded
+    if (questionsLoaded) {
+      setControlsEnabled(true);
+    } else {
+      setControlsEnabled(false);
+    }
+  } else {
+    authStatus.textContent = "Not signed in. Please sign in to start practising.";
+    logoutBtn.style.display = "none";
+    // You might want to keep login/register visible
+    loginBtn.style.display = "inline-block";
+    registerBtn.style.display = "inline-block";
+
+    // Hide quiz UI
+    controlsBox.style.display = "none";
+    quizBox.style.display = "none";
+    resultBox.style.display = "none";
+    setControlsEnabled(false);
+  }
+});
 
 // ------------- Initial load -------------
 document.addEventListener("DOMContentLoaded", () => {
