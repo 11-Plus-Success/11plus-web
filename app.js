@@ -37,6 +37,15 @@ const scoreText = document.getElementById("score-text");
 const reviewList = document.getElementById("review-list");
 const restartBtn = document.getElementById("restart-btn");
 
+// "My Results" UI
+const myResultsBtn = document.getElementById("my-results-btn");
+const resultsSection = document.getElementById("results-section");
+const resultsStatus = document.getElementById("results-status");
+const resultsList = document.getElementById("results-list");
+const refreshResultsBtn = document.getElementById("refresh-results-btn");
+
+
+
 // Auth-related DOM references
 const authBox = document.getElementById("auth-box");
 const authEmail = document.getElementById("auth-email");
@@ -49,6 +58,7 @@ const logoutBtn = document.getElementById("logout-btn");
 
 // Firebase auth handle
 const auth = firebase.auth();
+const db = firebase.firestore();
 
 // Map internal topic codes → nice readable labels
 const TOPIC_LABELS = {
@@ -116,6 +126,20 @@ function setControlsEnabled(enabled) {
   modeSelect.disabled = !enabled;
   startBtn.disabled = !enabled || !questionsLoaded;
 }
+
+function formatDate(ts) {
+  if (!ts) return "";
+  // ts may be a Firestore Timestamp or JS Date
+  const d = ts.toDate ? ts.toDate() : ts;
+  return d.toLocaleString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+
 
 // ------------- Loading questions from JSON -------------
 function loadAllQuestions() {
@@ -426,11 +450,149 @@ function showResult(timeUp) {
 
   summary.innerHTML = summaryHtml;
   reviewList.appendChild(summary);
+
+  // --- Save result to Firestore for this user ---
+  const user = auth.currentUser;
+  if (user && db) {
+    // Overall percentage
+    const totalQuestions = quizQuestions.length;
+    const overallPercentage =
+      totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+
+    // Build a compact per-subject summary
+    const subjectsSummary = {};
+    Object.keys(subjectTopicStats).forEach(subject => {
+      const correct = subjectCorrectCounts[subject] || 0;
+      const total = subjectTotalCounts[subject] || 0;
+      const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+      subjectsSummary[subject] = {
+        correct,
+        total,
+        percentage: pct
+      };
+    });
+
+    db.collection("results")
+      .add({
+        uid: user.uid,
+        email: user.email,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        mode: currentMode,
+        totalQuestions,
+        score,
+        overallPercentage,
+        subjects: subjectsSummary
+      })
+      .catch(err => {
+        console.error("Error saving result to Firestore:", err);
+      });
+  }
+  
 }
+
+async function loadUserResults() {
+  const user = auth.currentUser;
+  if (!user) {
+    resultsStatus.textContent = "Please sign in to view your results.";
+    resultsList.innerHTML = "";
+    return;
+  }
+
+  resultsStatus.textContent = "Loading results...";
+  resultsList.innerHTML = "";
+
+  try {
+    // Simpler query: no orderBy, so no composite index needed
+    const snapshot = await db
+      .collection("results")
+      .where("uid", "==", user.uid)
+      .get();
+
+    if (snapshot.empty) {
+      resultsStatus.textContent = "No results yet. Complete a quiz to see your progress here.";
+      return;
+    }
+
+    // Convert to array and sort by createdAt DESC on the client
+    const docs = snapshot.docs.slice().sort((a, b) => {
+      const da = a.data().createdAt;
+      const dbb = b.data().createdAt;
+      const ta = da && da.toMillis ? da.toMillis() : 0;
+      const tb = dbb && dbb.toMillis ? dbb.toMillis() : 0;
+      return tb - ta; // newest first
+    });
+
+    resultsStatus.textContent = `Showing your last ${docs.length} result(s).`;
+
+    docs.forEach(doc => {
+      const data = doc.data();
+
+      const card = document.createElement("div");
+      card.className = "result-card";
+
+      const when = data.createdAt ? formatDate(data.createdAt) : "(no date)";
+      const overallPct =
+        typeof data.overallPercentage === "number"
+          ? data.overallPercentage
+          : Math.round((data.score / data.totalQuestions) * 100);
+
+      let subjectsHtml = "";
+      if (data.subjects) {
+        subjectsHtml += "<ul>";
+        Object.keys(data.subjects).forEach(subject => {
+          const s = data.subjects[subject];
+          subjectsHtml += `<li><strong>${subject}</strong>: ${s.correct}/${s.total} (${s.percentage}%)</li>`;
+        });
+        subjectsHtml += "</ul>";
+      }
+
+      card.innerHTML = `
+        <div class="result-card-header">
+          <div>
+            <div class="result-date">${when}</div>
+            <div class="result-mode">Mode: <strong>${data.mode || "unknown"}</strong></div>
+          </div>
+          <div class="result-overall">
+            <span class="result-overall-label">Overall:</span>
+            <span class="result-overall-value">${overallPct}% (${data.score}/${data.totalQuestions})</span>
+          </div>
+        </div>
+        ${
+          subjectsHtml
+            ? `<div class="result-subjects"><h4>By subject</h4>${subjectsHtml}</div>`
+            : ""
+        }
+      `;
+
+      resultsList.appendChild(card);
+    });
+  } catch (err) {
+    console.error("Error loading results:", err);
+    resultsStatus.textContent = "Error loading results. Please try again later.";
+  }
+}
+
 
 restartBtn.onclick = () => {
   setupQuiz();
 };
+
+myResultsBtn.onclick = () => {
+  // Toggle visibility
+  if (resultsSection.style.display === "none" || !resultsSection.style.display) {
+    resultsSection.style.display = "block";
+    loadUserResults();
+    // Optionally scroll to it
+    resultsSection.scrollIntoView({ behavior: "smooth" });
+  } else {
+    resultsSection.style.display = "none";
+  }
+};
+
+refreshResultsBtn.onclick = () => {
+  loadUserResults();
+};
+
 
 // ------------- Auth handlers -------------
 loginBtn.onclick = () => {
@@ -455,13 +617,15 @@ logoutBtn.onclick = () => {
   auth.signOut();
 };
 
+
 // React to auth state changes
 auth.onAuthStateChanged(user => {
   if (user) {
     authStatus.textContent = `Signed in as ${user.email}`;
     authError.textContent = "";
+    
     logoutBtn.style.display = "inline-block";
-    loginBtn.style.display = "inline-block"; // you can also hide login/register if you prefer
+    loginBtn.style.display = "inline-block";  // your choice to keep visible
     registerBtn.style.display = "inline-block";
 
     // Show controls box
@@ -473,10 +637,11 @@ auth.onAuthStateChanged(user => {
     } else {
       setControlsEnabled(false);
     }
+
   } else {
     authStatus.textContent = "Not signed in. Please sign in to start practising.";
+    
     logoutBtn.style.display = "none";
-    // You might want to keep login/register visible
     loginBtn.style.display = "inline-block";
     registerBtn.style.display = "inline-block";
 
@@ -485,8 +650,14 @@ auth.onAuthStateChanged(user => {
     quizBox.style.display = "none";
     resultBox.style.display = "none";
     setControlsEnabled(false);
+
+    // 🔥 NEW — Hide “My Results” UI when logged out
+    resultsSection.style.display = "none";
+    resultsStatus.textContent = "";
+    resultsList.innerHTML = "";
   }
 });
+
 
 // ------------- Initial load -------------
 document.addEventListener("DOMContentLoaded", () => {
